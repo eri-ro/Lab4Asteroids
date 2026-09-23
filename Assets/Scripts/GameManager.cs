@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject meteorPrefab;
     public GameObject bigMeteorPrefab;
-    public bool gameOver = false;
 
     public int meteorCount = 0;
 
@@ -24,16 +23,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameOver)
-        {
-            CancelInvoke();
-        }
-
-        if (restartAction.action.IsPressed() && gameOver)
-        {
-            SceneManager.LoadScene("Week5Lab");
-        }
-
         if (meteorCount == 5)
         {
             BigMeteor();

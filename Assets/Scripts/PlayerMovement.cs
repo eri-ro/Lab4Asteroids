@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public GameObject laserPrefab;
 
@@ -12,34 +12,13 @@ public class Player : MonoBehaviour
     public InputActionReference attackInput;
     private float horizontalScreenLimit = 10f;
     private float verticalScreenLimit = 6f;
-    public float fireRate = 1f;
-
-    float sinceLastShot = 0;
-    private bool canShoot = true;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //attackInput.action.performed += Shooting;
-    }
+  
 
     // Update is called once per frame
     void Update()
     {
         Movement();
-        if (sinceLastShot > 0)
-        {
-            sinceLastShot -= Time.deltaTime;
-        }
-        else
-        {
-            canShoot = true;
-        }
-
-        if (attackInput.action.IsPressed())
-            {
-                Shooting();
-            }
+        Shooting();
     }
 
     void Movement()
@@ -61,11 +40,17 @@ public class Player : MonoBehaviour
 
     void Shooting()
     {
-        if (canShoot)
+        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
             Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             canShoot = false;
-            sinceLastShot = fireRate;
+            StartCoroutine("Cooldown");
         }
+    }
+
+    private IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        canShoot = true;
     }
 }
