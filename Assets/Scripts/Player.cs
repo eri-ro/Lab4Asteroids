@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public InputActionReference attackInput;
     private float horizontalScreenLimit = 10f;
     private float verticalScreenLimit = 6f;
+    public float fireRate = 1f;
 
     float sinceLastShot = 0;
     private bool canShoot = true;
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour
         {
             Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             canShoot = false;
-            sinceLastShot = 2;
+            sinceLastShot = fireRate;
         }
     }
 }
