@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float speed = 6f;
     public InputActionReference moveInput;
-    public InputActionReference attackInput;
     private float horizontalScreenLimit = 10f;
     private float verticalScreenLimit = 6f;
   
@@ -18,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Movement();
-        Shooting();
     }
 
     void Movement()
@@ -36,21 +34,5 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
         }
-    }
-
-    void Shooting()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
-        {
-            Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            canShoot = false;
-            StartCoroutine("Cooldown");
-        }
-    }
-
-    private IEnumerator Cooldown()
-    {
-        yield return new WaitForSeconds(1f);
-        canShoot = true;
     }
 }

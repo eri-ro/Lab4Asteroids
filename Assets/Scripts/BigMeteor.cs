@@ -39,7 +39,7 @@ public class BigMeteor : MonoBehaviour
     {
         if (whatIHit.tag == "Player")
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().gameOver = true;
+            GameObject.Find("GameManager").GetComponent<GameOver>().gameOver = true;
             Destroy(whatIHit.gameObject);
         }
         else if (whatIHit.tag == "Laser")
