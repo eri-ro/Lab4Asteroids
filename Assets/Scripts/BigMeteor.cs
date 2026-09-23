@@ -6,21 +6,28 @@ public class BigMeteor : MonoBehaviour
 {
     private int hitCount = 0;
 
-    // Start is called before the first frame update
+    public Vector3 orbitCenter = Vector3.zero;
+    public float orbitSpeed = 2f;
+
+    private float radius;
+    private float angle;
+
     void Start()
     {
-        
+        Vector3 offset = transform.position - orbitCenter;
+
+        radius = offset.magnitude;
+        angle = Mathf.Atan2(offset.y, offset.x);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.down * Time.deltaTime * 0.5f);
+        angle += orbitSpeed * Time.deltaTime;
 
-        if (transform.position.y < -11f)
-        {
-            Destroy(this.gameObject);
-        }
+        float x = orbitCenter.x + Mathf.Cos(angle) * radius;
+        float y = orbitCenter.y + Mathf.Sin(angle) * radius;
+
+        transform.position = new Vector3(x, y, transform.position.z);
 
         if (hitCount >= 5)
         {
