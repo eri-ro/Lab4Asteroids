@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public InputActionReference restartAction;
     public GameObject playerPrefab;
     public GameObject meteorPrefab;
     public GameObject bigMeteorPrefab;
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour
             CancelInvoke();
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && gameOver)
+        if (restartAction.action.IsPressed() && gameOver)
         {
             SceneManager.LoadScene("Week5Lab");
         }

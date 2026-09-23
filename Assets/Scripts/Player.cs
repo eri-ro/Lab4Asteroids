@@ -1,32 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     public GameObject laserPrefab;
 
     private float speed = 6f;
+    public InputActionReference moveInput;
+    public InputActionReference attackInput;
     private float horizontalScreenLimit = 10f;
     private float verticalScreenLimit = 6f;
+
+    float sinceLastShot = 0;
     private bool canShoot = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //attackInput.action.performed += Shooting;
     }
 
     // Update is called once per frame
     void Update()
     {
         Movement();
-        Shooting();
+        if (sinceLastShot > 0)
+        {
+            sinceLastShot -= Time.deltaTime;
+        }
+        else
+        {
+            canShoot = true;
+        }
+
+        if (attackInput.action.IsPressed())
+            {
+                Shooting();
+            }
     }
 
     void Movement()
     {
-        transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Time.deltaTime * speed);
+        float horInput = moveInput.action.ReadValue<Vector2>().x;
+        float vertInput = moveInput.action.ReadValue<Vector2>().y;
+
+        transform.Translate(new Vector3(horInput, vertInput, 0) * Time.deltaTime * speed);
+
         if (transform.position.x > horizontalScreenLimit || transform.position.x <= -horizontalScreenLimit)
         {
             transform.position = new Vector3(transform.position.x * -1f, transform.position.y, 0);
@@ -39,17 +60,11 @@ public class Player : MonoBehaviour
 
     void Shooting()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
+        if (canShoot)
         {
             Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             canShoot = false;
-            StartCoroutine("Cooldown");
+            sinceLastShot = 2;
         }
-    }
-
-    private IEnumerator Cooldown()
-    {
-        yield return new WaitForSeconds(1f);
-        canShoot = true;
     }
 }
