@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+    [Tooltip("R to restart")]
     public InputActionReference restartAction;
     public bool gameOver = false;
 

@@ -32,7 +32,7 @@ public class Meteor : MonoBehaviour
         
         if (hitCount >= hitsRequired)
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().meteorCount++;
+            GameObject.Find("MeteorSpawn").GetComponent<MeteorSpawn>().meteorCount++;
             Destroy(this.gameObject);
         }
     }
