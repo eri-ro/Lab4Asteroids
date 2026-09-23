@@ -14,6 +14,7 @@ public class Meteor : MonoBehaviour
     {
         Vector3 offset = transform.position - orbitCenter;
 
+        orbitSpeed = Random.Range(-orbitSpeed, orbitSpeed);
         radius = offset.magnitude;
         angle = Mathf.Atan2(offset.y, offset.x);
     }
