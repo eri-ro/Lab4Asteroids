@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c57b3e0be26344ba2a9411c0b8f1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOver
+  restartAction: {fileID: -4321383589337359992, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   gameOver: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

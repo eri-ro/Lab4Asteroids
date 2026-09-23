@@ -6,7 +6,9 @@ public class Meteor : MonoBehaviour
 {
     public Vector3 orbitCenter = Vector3.zero;
     public float orbitSpeed = 2f;
+    public float hitsRequired = 1;
 
+    private int hitCount = 0;
     private float radius;
     private float angle;
 
@@ -19,7 +21,7 @@ public class Meteor : MonoBehaviour
         angle = Mathf.Atan2(offset.y, offset.x);
     }
 
-    void Update()
+    public virtual void Update()
     {
         angle += orbitSpeed * Time.deltaTime;
 
@@ -27,6 +29,12 @@ public class Meteor : MonoBehaviour
         float y = orbitCenter.y + Mathf.Sin(angle) * radius;
 
         transform.position = new Vector3(x, y, transform.position.z);
+        
+        if (hitCount >= hitsRequired)
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().meteorCount++;
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D whatIHit)
@@ -38,9 +46,8 @@ public class Meteor : MonoBehaviour
             Destroy(this.gameObject);
         } else if (whatIHit.tag == "Laser")
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().meteorCount++;
             Destroy(whatIHit.gameObject);
-            Destroy(this.gameObject);
+            hitCount++;
         }
     }
 }

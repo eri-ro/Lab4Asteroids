@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-
+    public InputActionReference restartAction;
     public bool gameOver = false;
 
     void Update()
@@ -12,7 +13,7 @@ public class GameOver : MonoBehaviour
         {
             CancelInvoke();
         }
-        if (Input.GetKeyDown(KeyCode.R) && gameOver)
+        if (restartAction.action.IsPressed() && gameOver)
         {
             SceneManager.LoadScene("Week5Lab");
         }
