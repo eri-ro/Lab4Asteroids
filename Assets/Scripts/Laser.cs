@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+#region Update
+
+
     void Update()
     {
+        // Moves the laser and destroys it if it goes off screen
         transform.Translate(Vector3.up * Time.deltaTime * 8f);
 
         if (transform.position.y > 11f)
@@ -20,4 +18,7 @@ public class Laser : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+#endregion
+
 }

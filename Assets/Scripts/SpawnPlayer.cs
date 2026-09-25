@@ -7,18 +7,6 @@ public class SpawnPlayer : MonoBehaviour
     public CinemachineCamera CineCamera;    // Cinemachine Camera object
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        Spawn();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void Spawn()
     {
         GameObject SpawnedPlayer = Instantiate(playerPrefab, transform.position, Quaternion.identity);  // Spawn the player in the center of the screen
