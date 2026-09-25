@@ -1,15 +1,15 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class MeteorSpawn : MonoBehaviour
 {
-    public GameObject playerPrefab;
+
     public GameObject meteorPrefab;
     public GameObject bigMeteorPrefab;
 
     public int meteorCount = 0;
     void Start()
     {
-        Instantiate(playerPrefab, transform.position, Quaternion.identity);
         InvokeRepeating("SpawnMeteor", 1f, 2f);
     }
 
