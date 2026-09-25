@@ -4,16 +4,25 @@ using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
+
+#region Inspector
+
     public GameObject laserPrefab;
     public InputActionReference attackInput;
     public float fireRate = 1f;
 
+#endregion
+#region Variables
+
     float sinceLastShot = 0;
     private bool canShoot = true;
 
-    // Update is called once per frame
+#endregion
+#region Update
+
     void Update()
     {
+        // Updating the bool, and calling the method that controls fire rate
         if (sinceLastShot > 0)
         {
             sinceLastShot -= Time.deltaTime;
@@ -29,6 +38,11 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+#endregion
+#region Shooting
+
+    // Fire rate controls
+    // Stored in a seperate method for modularity
     void Shooting()
     {
         if (canShoot)
@@ -38,4 +52,7 @@ public class PlayerShoot : MonoBehaviour
             sinceLastShot = fireRate;
         }
     }
+
+#endregion
+
 }

@@ -6,17 +6,10 @@ public class SpawnPlayer : MonoBehaviour
     public GameObject playerPrefab;         // Player game object prefab
     public CinemachineCamera CineCamera;    // Cinemachine Camera object
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Spawn();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void Spawn()
